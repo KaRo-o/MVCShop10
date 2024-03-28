@@ -14,6 +14,7 @@
 </script>
 <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script type="text/javascript">
+var i = 0;
 
 function fncAddProduct(){
 	//Form 유효성 검증
@@ -48,23 +49,26 @@ function resetData(){
 }
 
 function appendImageSlot() {
-	
-	var newNode = '<div><input type="file" name="fileName" class="ct_input_g" style="width: 200px; height: 19px" maxLength="13"/>'
-					   + '<input type="button" onclick="removeImageSlot();" value="삭제"></div>';
+	i++
+	var newNode = '<div id='+i+'><input type="file" name="fileName" class="ct_input_g" style="width: 200px; height: 19px" maxLength="13"/>'
+					   + '<input type="button" onclick="javascript:removeImageSlot('+i+');" value="삭제"></div>';
 	
 	$('.inputImageTd').append(newNode);
 	
 }
 
-function removeImageSlot() {
 
-	$('.inputImageTd div:last-child').remove();
+function removeImageSlot(j) {
+
+	/* $('.inputImageTd div:last-child').remove(); */
+	/* $('.inputImageTd div input:button:last-child').remove(); */
+	$('#'+j+'').remove();
 	
 }
 
 
 $(function(){
-	
+		
 	$('.addImageSlot').on('click',function(){
 		appendImageSlot();
 	});
@@ -172,7 +176,6 @@ $(function(){
 		<td class="ct_write01 inputImageTd">
 			<input type="button" class="addImageSlot" value="이미지 추가">
 			<br/>
-			<input type="button" onclick="javascript:removeImageSlot();" value="삭제">
 			
 		</td>
 	</tr>
